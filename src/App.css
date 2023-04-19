@@ -1,4 +1,16 @@
-.butto{
+.Product{
+  background-color: rgb(222, 222, 222);
+  width: 400px;
+  height: 500px;
+  margin: 20px;
+  display: inline-block;
+}
+img{
+  width: 400px;
+  height: 327px;
+}
+.btn{
   display: flex;
   justify-content: space-between;
 }
+

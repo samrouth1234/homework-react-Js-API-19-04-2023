@@ -1,25 +1,28 @@
-import React from 'react'
-import Product from './components/Product';
+import React, { useEffect, useState } from "react";
+import Product from "./components/Product";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import "./App.css";
+import './App.css';
+import Navba from "./components/Navba";
 function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("https://api.escuelajs.co/api/v1/products");
+      const data = await response.json();
+      setData(data);
+    }
+    fetchData();
+  }, []);
   return (
     <>
-      <Container>
-      <Row xs={1} md={2} lg={4}>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-        <Col><Product/></Col>
-      </Row>
-      </Container>
+      <div className="App">
+        <Navba />
+        <main>
+          {data.slice(0, 16).map((data) => (
+            <Product key={data.id} data={data} />
+          ))}
+        </main>
+      </div>
     </>
   )
 }
